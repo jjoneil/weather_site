@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script
+		src="https://code.jquery.com/jquery-3.1.1.js"
+		integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+		crossorigin="anonymous"
+	></script>
+
+	<style type="text/css">
+		body{
+			font-family: sans-serif;
+			text-align: center;
+			border: 20px solid gray;
+			background-image: url(http://cdn.kubasto.com/time/files/2013/07/clouds-4-v.jpg);
+			background-size: 120%;
+		} .key{
+			font-size: 24px;
+		} div div {
+			border: 1px solid gray;
+			width: 60%;
+			margin: auto;
+			margin-bottom: 6px;
+			background-color: rgba(50, 50, 50, .5);
+		} #weather {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<script>
+		// TODO: using the response data from api.geonames.org, build an HTML page that displays the weather to the user in a "fun" way
+		$(document).ready(function(){
+				$.get('http://api.geonames.org/weatherJSON?north=41&south=39&east=-104&west=-106&username=ertyseidohl', function(res){
+						//console.log(res);
+						//initiate in here, call out to other functions
+						for(var key in res.weatherObservations[0]) {
+				  			var add = $('#weather').children().first().clone();
+				  			add.find('.key').text(key);
+				  			add.find('.values').text(res.weatherObservations[0][key]);
+				  			$('#all').append(add);
+			  			}
+
+					})
+				});
+
+		//make function
+		//for items in weatherObservations .0
+		//append those idems to table or paragraphs
+
+	</script>
+		<h3>Current Weather in Boulder, CO</h3>
+		<div id="weather">
+		<div>
+			<p class="key"></p>
+			<p class="values"></p>
+		</div>
+		</div>
+		<div id="all"></div>
+</body>
+</html>
